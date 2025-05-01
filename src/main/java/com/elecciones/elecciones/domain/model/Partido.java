@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "partido")
 @Getter
@@ -22,6 +24,9 @@ public class Partido {
     private Long idPartido;
     private String nombre;
     private String simbolo;
+
+    @OneToMany
+    private List<Voto> votos;
 
     public Partido(@Valid DtoPartido dtoPartido) {
         this.nombre= dtoPartido.partido();

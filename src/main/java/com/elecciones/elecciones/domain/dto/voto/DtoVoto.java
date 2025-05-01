@@ -1,10 +1,11 @@
 package com.elecciones.elecciones.domain.dto.voto;
 
 
+import jakarta.validation.constraints.NotNull;
 
 public record DtoVoto(
-        Long partido,
-        Long alumno
+       @NotNull Long partido,
+       @NotNull Long alumno
 ) {
 
 }

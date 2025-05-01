@@ -1,7 +1,9 @@
 package com.elecciones.elecciones.domain.dto.partido;
 
+import jakarta.validation.constraints.NotNull;
+
 public record DtoPartido(
-        String partido,
-        String simbolo
+        @NotNull String partido,
+       @NotNull String simbolo
 ) {
 }

@@ -21,7 +21,7 @@ public class ControllerVoto {
     }
 
     @GetMapping("/unidad/{id}")
-    public ResponseEntity unidad(@PathVariable Long id){
+    public ResponseEntity<?> unidad(@PathVariable Long id){
         return serviceVoto.unidad(id);
     }
 
@@ -31,8 +31,13 @@ public class ControllerVoto {
     }
 
     @PostMapping("/crear")
-    public ResponseEntity crear(@RequestBody DtoVoto dtoVoto){
+    public ResponseEntity crear(@RequestBody @Valid DtoVoto dtoVoto){
         return serviceVoto.crear(dtoVoto);
+    }
+
+    @GetMapping("/conteoPorPartido/{id}")
+    public ResponseEntity buscarPorPartido(@PathVariable Long id){
+        return serviceVoto.buscarPorPartido(id);
     }
 
 }

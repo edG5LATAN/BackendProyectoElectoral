@@ -23,8 +23,10 @@ public class Voto {
     private Long idCodigo;
 
     @OneToOne
+    @JoinColumn(name = "alumno_id_alumno", unique = true)
     private Alumno alumno;
     @ManyToOne
+    @JoinColumn(name = "partido_id_partido")
     private Partido partido;
 
     public Voto(Partido partido, Alumno alumno) {

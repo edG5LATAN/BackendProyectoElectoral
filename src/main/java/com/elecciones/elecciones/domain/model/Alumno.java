@@ -1,6 +1,7 @@
 package com.elecciones.elecciones.domain.model;
 
 
+import com.elecciones.elecciones.domain.Enumerate.Grado;
 import com.elecciones.elecciones.domain.dto.alumno.DtoAlumno;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -22,6 +23,8 @@ public class Alumno {
     private Long idAlumno;
     private String nombre;
     private String apellido;
+    @Enumerated(EnumType.STRING)
+    private Grado grado;
 
     @OneToOne(cascade = CascadeType.REMOVE)
     private Usuario usuario;
@@ -30,5 +33,6 @@ public class Alumno {
         this.nombre=dtoAlumno.nombre();
         this.apellido= dtoAlumno.apellido();
         this.usuario=usuario;
+        this.grado=dtoAlumno.grado();
     }
 }

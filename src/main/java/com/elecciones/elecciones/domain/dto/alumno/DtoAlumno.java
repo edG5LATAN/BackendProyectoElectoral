@@ -1,11 +1,15 @@
 package com.elecciones.elecciones.domain.dto.alumno;
 
+import com.elecciones.elecciones.domain.Enumerate.Grado;
 import com.elecciones.elecciones.domain.dto.usuario.DtoUsuario;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import jakarta.validation.constraints.NotNull;
 
 
 public record DtoAlumno(
-        String nombre,
-        String apellido,
-        DtoUsuario usuario
+       @NotNull @JsonAlias("name") String nombre,
+       @NotNull @JsonAlias("lastname") String apellido,
+       @NotNull @JsonAlias("user") DtoUsuario usuario,
+       @NotNull @JsonAlias("course") Grado grado
 ) {
 }
