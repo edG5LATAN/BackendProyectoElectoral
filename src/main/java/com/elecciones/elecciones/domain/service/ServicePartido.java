@@ -15,29 +15,29 @@ public class ServicePartido {
 
     private final RepositoryPartido repositoryPartido;
 
-    public ResponseEntity mostrar() {
+    public ResponseEntity<?> mostrar() {
         var partido= repositoryPartido.findAll();
         return ResponseEntity.ok(partido);
     }
 
-    public ResponseEntity borrar(Long id) {
-        var partido= repositoryPartido.getReferenceById(id);
-        if(partido!=null){
-            repositoryPartido.delete(partido);
+    public ResponseEntity<?> borrar(Long id) {
+        var partido= repositoryPartido.findById(id);
+        if(partido.isPresent()){
+            repositoryPartido.delete(partido.get());
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
     }
 
-    public ResponseEntity unidad(Long id) {
-        var partido= repositoryPartido.getReferenceById(id);
-        if(partido!=null){
+    public ResponseEntity<?> unidad(Long id) {
+        var partido= repositoryPartido.findById(id);
+        if(partido.isPresent()){
             return ResponseEntity.ok(partido);
         }
         return ResponseEntity.notFound().build();
     }
 
-    public ResponseEntity crear(@Valid DtoPartido dtoPartido) {
+    public ResponseEntity<?> crear(@Valid DtoPartido dtoPartido) {
         var partido= repositoryPartido.save(new Partido(dtoPartido));
         return ResponseEntity.ok(partido);
     }

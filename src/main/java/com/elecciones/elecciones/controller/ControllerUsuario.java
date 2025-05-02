@@ -29,8 +29,4 @@ public class ControllerUsuario {
         return serviceUsuario.unidad(id);
     }
 
-    @PostMapping("/crear")
-    public ResponseEntity crear(@RequestBody @Valid DtoUsuario dtoUsuario){
-        return serviceUsuario.crear(dtoUsuario);
-    }
 }

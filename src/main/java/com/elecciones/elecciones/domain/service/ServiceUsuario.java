@@ -14,30 +14,25 @@ public class ServiceUsuario {
 
     private final RepositoryUsuario repositoryUsuario;
 
-    public ResponseEntity mostrar() {
+    public ResponseEntity<?> mostrar() {
         var usuarios= repositoryUsuario.findAll();
         return ResponseEntity.ok(usuarios);
     }
 
-    public ResponseEntity borrar(Long id) {
-        var usuario= repositoryUsuario.getReferenceById(id);
-        if(usuario!=null){
-            repositoryUsuario.delete(usuario);
+    public ResponseEntity<?> borrar(Long id) {
+        var usuario= repositoryUsuario.findById(id);
+        if(usuario.isPresent()){
+            repositoryUsuario.delete(usuario.get());
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
     }
 
-    public ResponseEntity unidad(Long id) {
-        var usuario= repositoryUsuario.getReferenceById(id);
-        if(usuario!=null){
+    public ResponseEntity<?> unidad(Long id) {
+        var usuario= repositoryUsuario.findById(id);
+        if(usuario.isPresent()){
             return ResponseEntity.ok(usuario);
         }
         return ResponseEntity.notFound().build();
-    }
-
-    public ResponseEntity crear(@Valid DtoUsuario dtoUsuario) {
-        var usuario = repositoryUsuario.save(new Usuario(dtoUsuario));
-        return ResponseEntity.ok(usuario);
     }
 }

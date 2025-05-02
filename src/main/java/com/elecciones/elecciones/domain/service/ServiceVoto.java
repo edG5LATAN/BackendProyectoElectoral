@@ -29,17 +29,17 @@ public class ServiceVoto {
     }
 
     public ResponseEntity unidad(Long id) {
-        var voto= repositoryVoto.getReferenceById(id);
-        if(voto!=null){
+        var voto= repositoryVoto.findById(id);
+        if(voto.isPresent()){
             return ResponseEntity.ok(voto);
         }
         return ResponseEntity.notFound().build();
     }
 
     public ResponseEntity borrar(Long id) {
-        var voto= repositoryVoto.getReferenceById(id);
-        if(voto!=null){
-            repositoryVoto.delete(voto);
+        var voto= repositoryVoto.findById(id);
+        if(voto.isPresent()){
+            repositoryVoto.delete(voto.get());
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
