@@ -10,10 +10,11 @@ public record DtoAlumnoMostrar(
         String correo,
         Grado grado
 ) {
-    public DtoAlumnoMostrar(Alumno alumno, Usuario usuario){
+    public DtoAlumnoMostrar(Alumno alumno){
         this(alumno.getNombre(),
                 alumno.getApellido(),
-                usuario.getCorreo(),
+                alumno.getUsuario().getCorreo(),
                 alumno.getGrado());
     }
+
 }

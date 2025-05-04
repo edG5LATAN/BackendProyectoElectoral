@@ -23,7 +23,7 @@ public class ServiceAlumno {
     private final RepositoryUsuario repositoryUsuario;
 
     public ResponseEntity mostrar() {
-        var alumno= repositoryAlumno.findAll();
+        var alumno= repositoryAlumno.findAll().stream().map(DtoAlumnoMostrar::new).toList();
         return ResponseEntity.ok(alumno);
     }
 
@@ -41,15 +41,15 @@ public class ServiceAlumno {
         if(!alumnoB){
             return ResponseEntity.notFound().build();
         }
-        var alumno=repositoryAlumno.findById(id);
-        return ResponseEntity.ok(alumno);
+        Optional<Alumno> alumno=repositoryAlumno.findById(id);
+        return ResponseEntity.ok(new DtoAlumnoMostrar(alumno.get()));
     }
 
     public ResponseEntity crear(@Valid DtoAlumno dtoAlumno) {
         var clave= passEcond(dtoAlumno.usuario().clave());
         var usuario= repositoryUsuario.save(new Usuario(dtoAlumno.usuario(),clave));
         var alumno= repositoryAlumno.save(new Alumno(dtoAlumno,usuario));
-        return ResponseEntity.ok(new DtoAlumnoMostrar(alumno,usuario));
+        return ResponseEntity.ok(new DtoAlumnoMostrar(alumno));
     }
 
     private String passEcond(String clave){

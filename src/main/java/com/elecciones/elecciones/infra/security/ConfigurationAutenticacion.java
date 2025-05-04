@@ -12,22 +12,26 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class ConfigurationAutenticacion {
 
+    private final FilterConfiguration filterConfiguration;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(crs->crs.disable())
                 .sessionManagement(sess->sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(ht->ht.requestMatchers("/v1/login/loguearse",
-                                "/v1/alumno/mostrar","/v1/alumno/crear")
+                .authorizeHttpRequests(ht->ht.requestMatchers("/v1/loguearse/login",
+                                "/v1/alumno/mostrar","/v1/alumno/crear","/v1/loguearse/logout")
                         .permitAll()
                         .anyRequest()
                         .authenticated()
                 )
+                .addFilterBefore(filterConfiguration, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
