@@ -1,6 +1,7 @@
 package com.elecciones.elecciones.domain.service;
 
 import com.elecciones.elecciones.domain.dto.voto.DtoVoto;
+import com.elecciones.elecciones.domain.dto.voto.DtoVotoMostrar;
 import com.elecciones.elecciones.domain.model.Alumno;
 import com.elecciones.elecciones.domain.model.Partido;
 import com.elecciones.elecciones.domain.model.Voto;
@@ -24,14 +25,14 @@ public class ServiceVoto {
     private final RepositoryPartido repositoryPartido;
 
     public ResponseEntity mostrar() {
-        var voto= repositoryVoto.findAll();
-        return ResponseEntity.ok(voto);
+        var votos= repositoryVoto.findAll().stream().map(DtoVotoMostrar::new).toList();
+        return ResponseEntity.ok(votos);
     }
 
     public ResponseEntity unidad(Long id) {
         var voto= repositoryVoto.findById(id);
         if(voto.isPresent()){
-            return ResponseEntity.ok(voto);
+            return ResponseEntity.ok(new DtoVotoMostrar(voto.get()));
         }
         return ResponseEntity.notFound().build();
     }
@@ -60,7 +61,7 @@ public class ServiceVoto {
         }
 
         var voto = repositoryVoto.save(new Voto(partido.get(), alumno.get()));
-        return ResponseEntity.ok(voto);
+        return ResponseEntity.ok(new DtoVotoMostrar(voto));
     }
 
     public ResponseEntity buscarPorPartido(Long id) {

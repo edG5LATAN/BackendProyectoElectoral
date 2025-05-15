@@ -28,6 +28,9 @@ public class ConfigurationAutenticacion {
                 .authorizeHttpRequests(ht->ht.requestMatchers("/v1/loguearse/login",
                                 "/v1/alumno/mostrar","/v1/alumno/crear","/v1/loguearse/logout")
                         .permitAll()
+//                        .requestMatchers("/v1/alumno/borrar/**","/v1/partido/crear","/v1/partido/borrar/**",
+//                                "/v1/partido/unidad","/v1/alumno/borrar/**","/v1/alumno/borrar/**")
+//                        .hasRole("ADMIN")
                         .anyRequest()
                         .authenticated()
                 )
