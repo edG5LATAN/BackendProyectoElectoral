@@ -23,13 +23,13 @@ public class Partido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPartido;
     private String nombre;
-    private String simbolo;
+    private String bandera;
 
     @OneToMany
     private List<Voto> votos;
 
     public Partido(@Valid DtoPartido dtoPartido) {
         this.nombre= dtoPartido.partido();
-        this.simbolo= dtoPartido.simbolo();
+        this.bandera = dtoPartido.bandera();
     }
 }

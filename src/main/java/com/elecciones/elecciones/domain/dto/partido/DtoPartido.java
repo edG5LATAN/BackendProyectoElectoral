@@ -4,6 +4,6 @@ import jakarta.validation.constraints.NotNull;
 
 public record DtoPartido(
         @NotNull String partido,
-       @NotNull String simbolo
+       @NotNull String bandera
 ) {
 }

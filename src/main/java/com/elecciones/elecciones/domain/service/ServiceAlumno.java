@@ -55,4 +55,9 @@ public class ServiceAlumno {
     private String passEcond(String clave){
         return BCrypt.withDefaults().hashToString(12, clave.toCharArray());
     }
+
+    public ResponseEntity alumnoPorCorreo(@Valid String correo) {
+        var alumno= repositoryAlumno.findByUsuarioCorreo(correo);
+        return ResponseEntity.ok(new DtoAlumnoMostrar(alumno));
+    }
 }

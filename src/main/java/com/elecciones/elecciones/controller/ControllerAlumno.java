@@ -37,6 +37,10 @@ public class ControllerAlumno {
         return serviceAlumno.unidad(id);
     }
 
+    @GetMapping("/porCorreo/{correo}")
+    public ResponseEntity alumnoPorCorreo(@PathVariable @Valid String correo){
+        return serviceAlumno.alumnoPorCorreo(correo);
+    };
 
 
 }
