@@ -11,6 +11,6 @@ public record DtoAlumno(
        @NotNull @JsonAlias("name") String nombre,
        @NotNull @JsonAlias("lastname") String apellido,
        @NotNull @JsonAlias("user") DtoUsuario usuario,
-       @NotNull @JsonAlias("course") Grado grado
+       @NotNull @JsonAlias("grade") Grado grado
 ) {
 }
