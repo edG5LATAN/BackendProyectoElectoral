@@ -36,6 +36,7 @@ public class ConfigurationAutenticacion {
 //                        .requestMatchers("/v1/alumno/borrar/**","/v1/partido/crear","/v1/partido/borrar/**",
 //                                "/v1/partido/unidad","/v1/alumno/borrar/**","/v1/alumno/borrar/**")
 //                        .hasRole("ADMIN")
+                        //if do you want user one acount of admin only  use this and createin your databases one alumn more
                         .anyRequest()
                         .authenticated()
                 )

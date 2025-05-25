@@ -48,15 +48,7 @@ public class FilterConfiguration extends OncePerRequestFilter {
             }
 
         }
-//
-//        var autToken= request.getHeader("Authorization");
-//        if(autToken!=null){
-//            String token= autToken.replace("Bearer ","");
-//           var subject=  securityJWT.getSubject(token);
-//           var usuario= repositoryUsuario.findByCorreo(subject);
-//           var autenticar= new UsernamePasswordAuthenticationToken(usuario,null,usuario.getAuthorities());
-//           SecurityContextHolder.getContext().setAuthentication(autenticar);
-//        }
+
         filterChain.doFilter(request,response);
     }
 }

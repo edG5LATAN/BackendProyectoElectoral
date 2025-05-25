@@ -38,7 +38,7 @@ public class ControllerAlumno {
     }
 
     @GetMapping("/porCorreo/{correo}")
-    public ResponseEntity alumnoPorCorreo(@PathVariable @Valid String correo){
+    public ResponseEntity alumnoPorCorreo(@PathVariable String correo){
         return serviceAlumno.alumnoPorCorreo(correo);
     };
 

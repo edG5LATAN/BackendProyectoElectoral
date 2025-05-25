@@ -1,6 +1,7 @@
 package com.elecciones.elecciones.domain.service;
 
 import com.elecciones.elecciones.domain.dto.partido.DtoPartido;
+import com.elecciones.elecciones.domain.dto.partido.DtoPartidoMostrar;
 import com.elecciones.elecciones.domain.model.Partido;
 import com.elecciones.elecciones.domain.repository.RepositoryPartido;
 import jakarta.validation.Valid;
@@ -16,7 +17,7 @@ public class ServicePartido {
     private final RepositoryPartido repositoryPartido;
 
     public ResponseEntity<?> mostrar() {
-        var partido= repositoryPartido.findAll();
+        var partido= repositoryPartido.findAll().stream().map(DtoPartidoMostrar::new).toList();
         return ResponseEntity.ok(partido);
     }
 

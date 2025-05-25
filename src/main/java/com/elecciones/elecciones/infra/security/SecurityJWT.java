@@ -7,6 +7,7 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.elecciones.elecciones.domain.model.Usuario;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -16,10 +17,13 @@ import java.time.ZoneOffset;
 @Service
 public class SecurityJWT {
 
+    @Value("${API_KEY}")
+    String apikey;
+
 
     public String tokenService(Usuario usuario){
         try {
-            Algorithm algorithm = Algorithm.HMAC256("apikey");
+            Algorithm algorithm = Algorithm.HMAC256(apikey);
             return JWT.create()
                     .withIssuer("electionSchool")
                     .withClaim("id",usuario.getIdUsuario())
@@ -35,7 +39,7 @@ public class SecurityJWT {
     public String getSubject(String token){
         DecodedJWT verifier = null;
         try {
-            Algorithm algorithm = Algorithm.HMAC256("apikey");
+            Algorithm algorithm = Algorithm.HMAC256(apikey);
              verifier = JWT.require(algorithm)
                     // specify any specific claim validations
                     .withIssuer("electionSchool")
@@ -53,6 +57,7 @@ public class SecurityJWT {
         return verifier.getSubject();
     }
 
+//    here you can modify the hours of use when you is login
     private Instant finalizarToken(){
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-06:00"));
     }
